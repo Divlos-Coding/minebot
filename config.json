@@ -1,0 +1,32 @@
+{
+    "options": {
+        "IP": "Write the server ip here.",
+        "username": "Write the accounts username or email here.",
+        "password": "Write the accounts password here.",
+        "authentication": "Write the accounts auth here, either mojang or microsoft.",
+        "version": "Write the Minecraft version the bot should use.",
+        "regexMSG": "default"
+    },
+
+    "owners": [
+        "User1",
+        "User2",
+        "User3",
+        "... and more"
+    ],
+
+    "scripts": {
+        "msgCommands": true
+    },
+
+    "discord": {
+        "enable": false,
+        "botToken": "Write the bot token here.",
+        "guildID": "Write your discord server id here.",
+        "channelID": "Write the channel id here, for the chat feature.",
+        "features": {
+            "commands": true,
+            "chat": true
+        }
+    }
+}
