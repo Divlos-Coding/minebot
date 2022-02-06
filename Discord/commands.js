@@ -25,6 +25,19 @@ function injectCMD(client) {
             name: "list",
             description: "Sends the server playerlist."
         });
+        commands?.create({
+            name: "names",
+            description: "Send the name history or targeted player",
+            type: "STRING",
+            options: [
+                {
+                    name: "username",
+                    description: "insert the name of target player",
+                    type: "STRING",
+                    required: true
+                }
+            ]
+        })
     });
 };
 
@@ -53,6 +66,12 @@ function injectRSP(client, bot) {
                 ephemeral: true
             });
         };
+        if (commandName == "names") {
+            const names = options.getString("username")
+            interaction.reply({
+                content: "https://namemc.com/profile/" + names
+            })
+        }
     });
 };
 

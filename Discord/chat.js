@@ -1,4 +1,5 @@
 const config = require("../config.json");
+const owners = require("../owners.json");
 const embeds = require("../lib/embeds.js");
 const splitter = require("../lib/splitter.js");
 const replacer = require("../lib/replacer.js");
@@ -14,7 +15,7 @@ function DiscordToMinecraft (client, bot) {
 function MinecraftToDiscord (client, bot) {
     if (config.discord.features.chat == false) return;
     bot.on("chat", (username, message) => {
-        if (username == "you" || config.owners.includes(username)) {
+        if (username == "you" || owners.includes(username)) {
             if (message.includes("TPS") || message.includes("tps") || message.includes("send") || message.includes("pos")) return;
         };
         client.channels.cache.get(config.discord.channelID).send(`**${username}:** ${message}`);
