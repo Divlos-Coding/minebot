@@ -11,7 +11,8 @@
   "dependencies": {
     "chatregex": "^2.0.1",
     "discord.js": "^13.6.0",
-    "mineflayer": "^3.15.0",
+    "mineflayer": "^3.16.0",
+    "mineflayer-death-event": "^1.0.0",
     "mineflayer-tps": "^1.0.1",
     "on-change": "^4.0.0",
     "prismarine-viewer": "^1.21.0"

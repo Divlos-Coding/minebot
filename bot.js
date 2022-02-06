@@ -11,7 +11,7 @@ const client = new Client({intents: intents});
 const discordCMD = require("./Discord/commands.js");
 const discordLogin = require("./Discord/login.js");
 const discordChat = require("./Discord/chat.js");
-const { brotliCompress } = require("zlib");
+const deathEvent = require("mineflayer-death-event");
 
 if (process.argv.length < 3 && config.options.IP == undefined) {
     throw new Error("There is no server specified, either via command line arguments or in config.json");
@@ -37,10 +37,15 @@ function createBot() {
         version: config.options.version
     });
 
+    bot.loadPlugin(deathEvent);
+
     bot.once("spawn", () => {
         if (config.options.regexMSG != "default") {
             bot.addChatPattern("customMSG", regexMSG, { parse: true, repeat: true });
         };
+        bot.addChatPattern("adv1", /^([a-zA-Z0-9_]+) has made the advancement (.+)$/, { parse: true, repeat: true });
+        bot.addChatPattern("adv2", /^([a-zA-Z0-9_]+) has completed the challenge (.+)$/, { parse: true, repeat: true });
+        bot.addChatPattern("death", /^([a-zA-Z0-9_]+) has completed the challenge (.+)$/, { parse: true, repeat: true });
         discordChat.JoinToDiscord(client, bot);
         discordChat.LeaveToDiscord(client, bot);
         fs.readdirSync("./Scripts").forEach((file) => {
@@ -59,7 +64,7 @@ function createBot() {
             };
         });
     });
-    
+
     bot.on("error", (error) => {
         throw new Error(error.stack);
     });
@@ -76,6 +81,8 @@ function createBot() {
         discordCMD.injectRSP(client, bot);
         discordChat.DiscordToMinecraft(client, bot);
         discordChat.MinecraftToDiscord(client, bot);
+        discordChat.AdvToDiscord(client, bot);
+        discordChat.DeathToDiscord(client, bot);
     };
 };
 

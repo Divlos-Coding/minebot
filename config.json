@@ -8,13 +8,6 @@
         "regexMSG": "default"
     },
 
-    "owners": [
-        "User1",
-        "User2",
-        "User3",
-        "... and more"
-    ],
-
     "scripts": {
         "msgCommands": true
     },
