@@ -45,7 +45,6 @@ function createBot() {
         };
         bot.addChatPattern("adv1", /^([a-zA-Z0-9_]+) has made the advancement (.+)$/, { parse: true, repeat: true });
         bot.addChatPattern("adv2", /^([a-zA-Z0-9_]+) has completed the challenge (.+)$/, { parse: true, repeat: true });
-        bot.addChatPattern("death", /^([a-zA-Z0-9_]+) has completed the challenge (.+)$/, { parse: true, repeat: true });
         discordChat.JoinToDiscord(client, bot);
         discordChat.LeaveToDiscord(client, bot);
         fs.readdirSync("./Scripts").forEach((file) => {

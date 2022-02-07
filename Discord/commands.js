@@ -1,6 +1,8 @@
 const config = require("../config.json");
 const mineflayer = require('mineflayer');
 const tpsPlugin = require('mineflayer-tps')(mineflayer);
+const embed = require("../lib/embeds.js");
+const { MessageEmbed } = require("discord.js");
 
 function injectCMD(client) {
     client.on("ready", () => {
@@ -27,12 +29,11 @@ function injectCMD(client) {
         });
         commands?.create({
             name: "names",
-            description: "Send the name history or targeted player",
-            type: "STRING",
+            description: "Sends the name history of targeted player",
             options: [
                 {
                     name: "username",
-                    description: "insert the name of target player",
+                    description: "Insert the name of target player",
                     type: "STRING",
                     required: true
                 }
@@ -41,7 +42,7 @@ function injectCMD(client) {
     });
 };
 
-function injectRSP(client, bot) {
+async function injectRSP(client, bot) {
     client.on("interactionCreate", async (interaction) => {
         if (config.discord.features.commands == false) return;
         if (!interaction.isCommand()) return;
@@ -67,12 +68,13 @@ function injectRSP(client, bot) {
             });
         };
         if (commandName == "names") {
-            const names = options.getString("username")
-            interaction.reply({
-                content: "https://namemc.com/profile/" + names
-            })
-        }
+            const name = options.getString("username");
+            let output = await embed.names(name);
+            await interaction.reply({
+                embeds: [output]
+            });
+        };
     });
 };
 
-module.exports = {injectCMD, injectRSP}; 
+module.exports = {injectCMD, injectRSP};
